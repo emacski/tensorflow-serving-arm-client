@@ -1,0 +1,39 @@
+name: Build
+on:
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
+env:
+  DOCKER_BUILDKIT: 1
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-user qemu-user-static
+      - name: Bazel Build Image
+        run: |
+          docker build \
+            --cache-from emacski/tensorflow-serving-arm-client:latest-devel \
+            --build-arg BUILDKIT_INLINE_CACHE=1 \
+            -t emacski/tensorflow-serving-arm-client:latest-devel \
+            -f tools/docker/Dockerfile .
+      - name: Bazel Build Cache
+        id: bazel-cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/bazel
+          key: bazel-cache
+      - name: Bazel Build
+        run: |
+          docker run --rm -v ${HOME}/.cache/bazel:/root/.cache/bazel --entrypoint chown emacski/tensorflow-serving-arm-client:latest-devel -R root:root /root/.cache/bazel
+          tools/ci/bazel.sh run --spawn_strategy=local --config=release //python/wheel:build_pure
+          tools/ci/bazel.sh run --spawn_strategy=local --config=release --config=linux_amd64 //python/wheel:build_platform
+          tools/ci/bazel.sh run --spawn_strategy=local --config=release --config=linux_arm64 //python/wheel:build_platform
+          tools/ci/bazel.sh run --spawn_strategy=local --config=release --config=linux_arm //python/wheel:build_platform
+          sudo chown -R $(whoami):$(whoami) ${HOME}/.cache/bazel
