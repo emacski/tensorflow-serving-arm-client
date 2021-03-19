@@ -13,22 +13,22 @@
 # limitations under the License.
 
 load(
-    "@com_github_emacski_bazeltools//protobuf:python_rules.bzl",
+    "@com_github_emacski_bazeltools//protobuf:py.bzl",
     "py_grpc_library",
     "py_proto_library",
 )
 
 package(default_visibility = ["//visibility:public"])
 
-py_proto_library(
-    name = "protobuf",
-    srcs_version = "PY3",
-    deps = ["//proto:protos_all"],
-)
-
 py_grpc_library(
-    name = "grpc",
+    name = "tensorflow_serving",
     srcs = ["//proto/tensorflow_serving/apis:protos_grpc_all"],
     srcs_version = "PY3",
-    deps = [":protobuf"],
+    deps = [":tensorflow_serving_protobuf"],
+)
+
+py_proto_library(
+    name = "tensorflow_serving_protobuf",
+    srcs_version = "PY3",
+    deps = ["//proto:protos_all"],
 )

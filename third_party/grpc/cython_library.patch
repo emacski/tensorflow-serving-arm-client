@@ -1,0 +1,11 @@
+--- bazel/cython_library.bzl	2021-03-16 02:51:29.077261654 +0000
++++ bazel/cython_library_new.bzl	2021-03-16 02:52:29.670069481 +0000
+@@ -47,7 +47,7 @@
+             # Optionally use PYTHON_BIN_PATH on Linux platforms so that python 3
+             # works. Windows has issues with cython_binary so skip PYTHON_BIN_PATH.
+             cmd =
+-                "PYTHONHASHSEED=0 $(location @cython//:cython_binary) --cplus $(SRCS) --output-file $(OUTS)",
++                "PYTHONHASHSEED=0 $(location @cython//:cython_binary) -X language_level=2 --cplus $(SRCS) --output-file $(OUTS)",
+             tools = ["@cython//:cython_binary"] + pxd_srcs,
+         )
+ 

@@ -18,13 +18,13 @@ PLAT="$1"
 OUT_DIR="$2"
 TMP_DIR="$(mktemp -d)"
 RUNFILES=${BASH_SOURCE[0]}.runfiles
-RUNFILES=${RUNFILES}/com_github_emacski_tensorflowservingarmclient
+SOURCEFILES=${RUNFILES}/com_github_emacski_tensorflowservingarmclient
 
-cp python/wheel/setup_*.py ${TMP_DIR}/setup.py
-cp python/wheel/bazel_build.py ${TMP_DIR}/bazel_build.py
-cp python/wheel/stable-status.txt ${TMP_DIR}/stable-status.txt
-cp -r ${RUNFILES}/python/tensorflow_serving ${TMP_DIR}
-cp -r ${RUNFILES}/python/tensorflow ${TMP_DIR}
+cp py/wheel/setup_*.py ${TMP_DIR}/setup.py
+cp py/wheel/bazel_build.py ${TMP_DIR}/bazel_build.py
+cp py/wheel/stable-status.txt ${TMP_DIR}/stable-status.txt
+cp -r ${SOURCEFILES}/py/tensorflow_serving ${TMP_DIR}
+cp -r ${SOURCEFILES}/py/tensorflow ${TMP_DIR}
 
 if [ $PLAT = "pure" ]; then
     pushd ${TMP_DIR}
@@ -32,8 +32,8 @@ if [ $PLAT = "pure" ]; then
     popd
 else
     # include grpcio and protobuf
-    cp -r ${RUNFILES}/external/com_google_protobuf/python/google ${TMP_DIR}
-    cp -r ${RUNFILES}/external/com_github_grpc_grpc/src/python/grpcio/grpc ${TMP_DIR}
+    cp -r ${SOURCEFILES}/external/com_google_protobuf/python/google ${TMP_DIR}
+    cp -r ${SOURCEFILES}/external/com_github_grpc_grpc/src/python/grpcio/grpc ${TMP_DIR}
     pushd ${TMP_DIR}
     python3 setup.py bdist_wheel --python-tag=cp37 --plat-name=${PLAT} >/dev/null
     popd

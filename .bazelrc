@@ -1,7 +1,5 @@
 # upstream tensorflow/serving version
-build --embed_label=2.2.0
-
-common --experimental_repo_remote_exec
+build --embed_label=2.3.0
 
 build --verbose_failures
 # enable proper toolchain resolution for cc rules
@@ -14,10 +12,10 @@ build --copt=-O3
 build:release --copt=-w
 build:release --output_filter=DONT_MATCH_ANYTHING
 
-# grpc build options
-build --define=grpc_no_ares=true
+# protobuf / grpc build options
 build --define=use_fast_cpp_protos=true
 build --define=allow_oversize_protos=true
+build --define=grpc_no_ares=true
 
 # build with shared gnu libstdc++ instead of static libc++
 build:gnulibcpp --@com_github_emacski_bazeltools//toolchain/cpp/clang:use_libcpp="libstdc++"

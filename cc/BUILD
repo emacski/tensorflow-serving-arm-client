@@ -1,4 +1,4 @@
-# Copyright 2020 Erik Maciejewski
+# Copyright 2021 Erik Maciejewski
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,28 +12,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load(
+    "@com_github_emacski_bazeltools//protobuf:cc.bzl",
+    "cc_grpc_library",
+    "cc_proto_library",
+)
+
 package(default_visibility = ["//visibility:public"])
 
-platform(
-    name = "linux_amd64",
-    constraint_values = [
-        "@platforms//os:linux",
-        "@platforms//cpu:x86_64",
-    ],
+cc_grpc_library(
+    name = "tensorflow_serving",
+    srcs = ["//proto/tensorflow_serving/apis:protos_grpc_all"],
+    deps = [":tensorflow_serving_protobuf"],
 )
 
-platform(
-    name = "linux_arm64",
-    constraint_values = [
-        "@platforms//os:linux",
-        "@platforms//cpu:aarch64",
-    ],
-)
-
-platform(
-    name = "linux_arm",
-    constraint_values = [
-        "@platforms//os:linux",
-        "@platforms//cpu:arm",
-    ],
+cc_proto_library(
+    name = "tensorflow_serving_protobuf",
+    deps = ["//proto:protos_all"],
 )

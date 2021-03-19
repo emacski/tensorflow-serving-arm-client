@@ -32,10 +32,10 @@ jobs:
       - name: Bazel Build
         run: |
           docker run --rm -v ${HOME}/.cache/bazel:/root/.cache/bazel --entrypoint chown emacski/tensorflow-serving-arm-client:latest-devel -R root:root /root/.cache/bazel
-          tools/ci/bazel.sh run --spawn_strategy=local --config=release //python/wheel:build_pure
-          tools/ci/bazel.sh run --spawn_strategy=local --config=release --config=linux_amd64 //python/wheel:build_platform
-          tools/ci/bazel.sh run --spawn_strategy=local --config=release --config=linux_arm64 //python/wheel:build_platform
-          tools/ci/bazel.sh run --spawn_strategy=local --config=release --config=linux_arm //python/wheel:build_platform
+          tools/ci/bazel.sh run //py/wheel:build_pure --config=release
+          tools/ci/bazel.sh run //py/wheel:build_platform --config=linux_amd64 --config=release
+          tools/ci/bazel.sh run //py/wheel:build_platform --config=linux_arm64 --config=release
+          tools/ci/bazel.sh run //py/wheel:build_platform --config=linux_arm --config=release
           sudo chown -R $(whoami):$(whoami) ${HOME}/.cache/bazel
       - name: Create Release
         id: create_release

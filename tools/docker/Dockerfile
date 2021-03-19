@@ -48,13 +48,6 @@ RUN dpkg --add-architecture arm64 && \
     mkdir /usr/arm-linux-gnueabihf/include/arm-linux-gnueabihf && \
     mv /usr/include/aarch64-linux-gnu/python3.7m /usr/aarch64-linux-gnu/include/aarch64-linux-gnu/ && \
     mv /usr/include/arm-linux-gnueabihf/python3.7m /usr/arm-linux-gnueabihf/include/arm-linux-gnueabihf/
-# install docker
-ENV INSTALL_DOCKER_VERSION=19.03.12
-RUN curl -L https://download.docker.com/linux/ubuntu/dists/bionic/pool/stable/amd64/docker-ce-cli_${INSTALL_DOCKER_VERSION}~3-0~ubuntu-bionic_amd64.deb \
-        -o docker-ce-cli_${INSTALL_DOCKER_VERSION}~3-0~ubuntu-bionic_amd64.deb && \
-    dpkg -i docker-ce-cli_${INSTALL_DOCKER_VERSION}~3-0~ubuntu-bionic_amd64.deb && \
-    rm -f docker-ce-cli_${INSTALL_DOCKER_VERSION}~3-0~ubuntu-bionic_amd64.deb
-ENV DOCKER_CLI_EXPERIMENTAL=enabled
 # install bazel
 RUN apt-get update && \
     apt-get install -y \
@@ -62,7 +55,7 @@ RUN apt-get update && \
         make patch zlib1g-dev git && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-ENV INSTALL_BAZEL_VERSION=3.4.1
+ENV INSTALL_BAZEL_VERSION=4.0.0
 RUN curl -L https://github.com/bazelbuild/bazel/releases/download/${INSTALL_BAZEL_VERSION}/bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh \
         -o bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
     chmod +x bazel-${INSTALL_BAZEL_VERSION}-installer-linux-x86_64.sh && \
