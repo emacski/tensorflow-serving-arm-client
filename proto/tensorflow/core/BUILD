@@ -19,6 +19,7 @@ proto_library(
         "protobuf/cluster.proto",
         "protobuf/config.proto",
         "protobuf/control_flow.proto",
+        "protobuf/data/experimental/service_config.proto",
         "protobuf/data/experimental/snapshot.proto",
         "protobuf/debug.proto",
         "protobuf/debug_event.proto",
