@@ -4,7 +4,7 @@ package(default_visibility = ["//visibility:public"])
 
 proto_library(
     name = "protos_all",
-    go_package = "github.com/tensorflow-serving-arm-client/go/tensorflow/core/example",
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/example",
     strip_import_prefix = "/proto/",
     deps = [
         ":example_parser_configuration_proto",
@@ -16,14 +16,14 @@ proto_library(
 proto_library(
     name = "feature_proto",
     srcs = ["feature.proto"],
-    go_package = "github.com/tensorflow-serving-arm-client/go/tensorflow/core/example",
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/example",
     strip_import_prefix = "/proto/",
 )
 
 proto_library(
     name = "example_parser_configuration_proto",
     srcs = ["example_parser_configuration.proto"],
-    go_package = "github.com/tensorflow-serving-arm-client/go/tensorflow/core/example",
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/example",
     strip_import_prefix = "/proto/",
     deps = [
         "//proto/tensorflow/core/framework:resource_handle_proto",
@@ -36,7 +36,7 @@ proto_library(
 proto_library(
     name = "example_proto",
     srcs = ["example.proto"],
-    go_package = "github.com/tensorflow-serving-arm-client/go/tensorflow/core/example",
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/example",
     strip_import_prefix = "/proto/",
     deps = [":feature_proto"],
 )

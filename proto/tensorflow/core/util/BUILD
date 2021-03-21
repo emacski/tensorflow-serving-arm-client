@@ -4,7 +4,7 @@ package(default_visibility = ["//visibility:public"])
 
 proto_library(
     name = "protos_all",
-    go_package = "github.com/tensorflow-serving-arm-client/go/tensorflow/core/util",
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/util",
     strip_import_prefix = "/proto/",
     deps = [
         ":event_proto",
@@ -17,14 +17,14 @@ proto_library(
 proto_library(
     name = "test_log_proto",
     srcs = ["test_log.proto"],
-    go_package = "github.com/tensorflow-serving-arm-client/go/tensorflow/core/util",
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/util",
     strip_import_prefix = "/proto/",
 )
 
 proto_library(
     name = "saved_tensor_slice_proto",
     srcs = ["saved_tensor_slice.proto"],
-    go_package = "github.com/tensorflow-serving-arm-client/go/tensorflow/core/util",
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/util",
     strip_import_prefix = "/proto/",
     deps = [
         "//proto/tensorflow/core/framework:resource_handle_proto",
@@ -39,14 +39,14 @@ proto_library(
 proto_library(
     name = "memmapped_file_system_proto",
     srcs = ["memmapped_file_system.proto"],
-    go_package = "github.com/tensorflow-serving-arm-client/go/tensorflow/core/util",
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/util",
     strip_import_prefix = "/proto/",
 )
 
 proto_library(
     name = "event_proto",
     srcs = ["event.proto"],
-    go_package = "github.com/tensorflow-serving-arm-client/go/tensorflow/core/util",
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/util",
     strip_import_prefix = "/proto/",
     deps = [
         "//proto/tensorflow/core/framework:resource_handle_proto",

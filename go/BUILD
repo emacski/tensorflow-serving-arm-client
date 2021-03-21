@@ -23,37 +23,37 @@ package(default_visibility = ["//visibility:public"])
 go_grpc_library(
     name = "tensorflow_serving",
     srcs = ["//proto/tensorflow_serving/apis:protos_grpc_all"],
-    importpath = "github.com/tensorflow-serving-arm-client/go/tensorflow_serving",
+    importpath = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow_serving",
     deps = [":tensorflow_serving_protobuf"],
 )
 
 go_proto_library(
     name = "tensorflow_serving_protobuf",
-    importpath = "github.com/tensorflow-serving-arm-client/go/tensorflow_serving",
+    importpath = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow_serving",
     proto = ["//proto/tensorflow_serving:protos_all"],
     deps = [
-        ":tensorflow_core_proto",
-        ":tensorflow_example_proto",
-        ":tensorflow_framework_proto",
+        ":tensorflow_core",
+        ":tensorflow_example",
+        ":tensorflow_framework",
     ],
 )
 
 go_proto_library(
-    name = "tensorflow_core_proto",
-    importpath = "github.com/tensorflow-serving-arm-client/go/tensorflow/core",
+    name = "tensorflow_core",
+    importpath = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core",
     proto = ["//proto/tensorflow/core:protos_all"],
-    deps = [":tensorflow_framework_proto"],
+    deps = [":tensorflow_framework"],
 )
 
 go_proto_library(
-    name = "tensorflow_framework_proto",
-    importpath = "github.com/tensorflow-serving-arm-client/go/tensorflow/core/framework",
+    name = "tensorflow_framework",
+    importpath = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/framework",
     proto = ["//proto/tensorflow/core/framework:protos_all"],
 )
 
 go_proto_library(
-    name = "tensorflow_example_proto",
-    importpath = "github.com/tensorflow-serving-arm-client/go/tensorflow/core/example",
+    name = "tensorflow_example",
+    importpath = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/example",
     proto = ["//proto/tensorflow/core/example:protos_all"],
-    deps = [":tensorflow_framework_proto"],
+    deps = [":tensorflow_framework"],
 )

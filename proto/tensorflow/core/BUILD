@@ -4,7 +4,7 @@ package(default_visibility = ["//visibility:public"])
 
 proto_library(
     name = "protos_all",
-    go_package = "github.com/tensorflow-serving-arm-client/go/tensorflow/core",
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core",
     strip_import_prefix = "/proto/",
     deps = [
         ":core_protos",
@@ -41,7 +41,7 @@ proto_library(
         "protobuf/transport_options.proto",
         "protobuf/verifier_config.proto",
     ],
-    go_package = "github.com/tensorflow-serving-arm-client/go/tensorflow/core",
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core",
     strip_import_prefix = "/proto/",
     deps = [
         ":error_codes_proto_impl",
@@ -57,6 +57,6 @@ proto_library(
 proto_library(
     name = "error_codes_proto_impl",
     srcs = ["protobuf/error_codes.proto"],
-    go_package = "github.com/tensorflow-serving-arm-client/go/tensorflow/core",
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core",
     strip_import_prefix = "/proto/",
 )
