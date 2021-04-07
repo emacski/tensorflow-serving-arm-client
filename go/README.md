@@ -1,19 +1,10 @@
-# Copyright 2020 Erik Maciejewski
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+Go Client
+=========
 
-workspace(name = "com_github_emacski_tensorflowservingarmclient")
+## Bazel Workspace
 
+`WORKSPACE` Dependencies
+```python
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
@@ -23,26 +14,8 @@ http_archive(
     urls = ["https://github.com/emacski/bazel-tools/archive/9cbf59fc288489ab3c7e42ed124507e1b1adba3a.tar.gz"],
 )
 
+# OPTIONAL: only required if using the cross-build cc toolchain
 register_toolchains("@com_github_emacski_bazeltools//toolchain/cpp/clang:all")
-
-# python client deps
-
-http_archive(
-    name = "rules_python",
-    sha256 = "afe33d4a8091452cb785108f237c7f3dcef56345952aad124954a96d89c4aab6",
-    strip_prefix = "rules_python-0d23d579fd93b72fe94b27b0077fbf3dc8680724",
-    urls = ["https://github.com/bazelbuild/rules_python/archive/0d23d579fd93b72fe94b27b0077fbf3dc8680724.tar.gz"],
-)
-
-load("@rules_python//python:repositories.bzl", "py_repositories")
-
-py_repositories()
-
-load("@rules_python//python:pip.bzl", "pip_repositories")
-
-pip_repositories()
-
-# go client deps
 
 http_archive(
     name = "io_bazel_rules_go",
@@ -74,10 +47,11 @@ gazelle_dependencies()
 
 go_repository(
     name = "org_golang_google_grpc",
-    commit = "f74f0337644653eba7923908a4d7f79a4f3a267b",  # 1.36.0
     importpath = "google.golang.org/grpc",
+    commit = "f74f0337644653eba7923908a4d7f79a4f3a267b",  # 1.36.0
 )
 
+# required by google.golang.org/grpc
 go_repository(
     name = "org_golang_x_net",
     importpath = "golang.org/x/net",
@@ -85,6 +59,7 @@ go_repository(
     version = "v0.0.0-20190311183353-d8887717615a",
 )
 
+# required by golang.org/x/net
 go_repository(
     name = "org_golang_x_text",
     importpath = "golang.org/x/text",
@@ -92,13 +67,15 @@ go_repository(
     version = "v0.3.0",
 )
 
-# protobuf / grpc deps
+http_archive(
+    name = "com_github_emacski_tensorflowservingarmclient",
+    sha256 = "[BAZEL_HTTP_ARCHIVE_SHA]",
+    strip_prefix = "tensorflow-serving-arm-client-[GIT_COMMIT_SHA]",
+    urls = ["https://github.com/emacski/tensorflow-serving-arm-client/archive/[GIT_COMMIT_SHA].tar.gz"],
+)
 
 http_archive(
     name = "com_github_grpc_grpc",
-    patches = [
-        "@com_github_emacski_tensorflowservingarmclient//third_party/grpc:cython_library.patch",
-    ],
     sha256 = "bb6de0544adddd54662ba1c314eff974e84c955c39204a4a2b733ccd990354b7",
     strip_prefix = "grpc-1.36.3",
     urls = ["https://github.com/grpc/grpc/archive/v1.36.3.tar.gz"],
@@ -111,3 +88,26 @@ grpc_deps()
 load("@com_github_grpc_grpc//bazel:grpc_extra_deps.bzl", "grpc_extra_deps")
 
 grpc_extra_deps()
+```
+
+Optional Bazel Build Options
+(only required if cross-building)
+```sh
+# enable proper toolchain resolution
+--incompatible_enable_cc_toolchain_resolution
+
+# amd64 (x86_64)
+--platforms=@com_github_emacski_bazeltools//platform:linux_amd64
+# or
+--platforms=@io_bazel_rules_go//go/toolchain:linux_amd64
+
+# arm64 (aarch64)
+--platforms=@com_github_emacski_bazeltools//platform:linux_arm64
+# or
+--platforms=@io_bazel_rules_go//go/toolchain:linux_arm64
+
+# arm (armhf)
+--platforms=@com_github_emacski_bazeltools//platform:linux_arm
+# or
+--platforms=@io_bazel_rules_go//go/toolchain:linux_arm
+```
