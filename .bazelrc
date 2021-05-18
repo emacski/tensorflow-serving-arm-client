@@ -12,6 +12,10 @@ build --copt=-O3
 build:release --copt=-w
 build:release --output_filter=DONT_MATCH_ANYTHING
 
+# build with shared gnu libstdc++ instead of static libc++
+build:gnulibcpp --@com_github_emacski_bazeltools//toolchain/cpp/clang:use_libcpp="libstdc++"
+build:gnulibcpp --cxxopt=-D_GLIBCXX_USE_CXX11_ABI=0
+
 # protobuf / grpc build options
 build --define=use_fast_cpp_protos=true
 build --define=allow_oversize_protos=true
@@ -19,19 +23,19 @@ build --define=grpc_no_ares=true
 
 # platform config groups
 
-build:linux_amd64 --platforms=@com_github_emacski_bazeltools//platform:linux_amd64
+build:linux_amd64 --platforms=@com_github_emacski_bazeltools//toolchain:linux_amd64
 # boringssl requires legacy toolchain resolution
-build:linux_amd64 --crosstool_top=@com_github_emacski_bazeltools//toolchain/cpp/clang:toolchain
+build:linux_amd64 --crosstool_top=@com_github_emacski_bazeltools//toolchain/cpp/clang:clang11_crosstool
 build:linux_amd64 --cpu=k8
 
-build:linux_arm64 --platforms=@com_github_emacski_bazeltools//platform:linux_arm64
+build:linux_arm64 --platforms=@com_github_emacski_bazeltools//toolchain:linux_arm64
 # boringssl requires legacy toolchain resolution
-build:linux_arm64 --crosstool_top=@com_github_emacski_bazeltools//toolchain/cpp/clang:toolchain
+build:linux_arm64 --crosstool_top=@com_github_emacski_bazeltools//toolchain/cpp/clang:clang11_crosstool
 build:linux_arm64 --cpu=aarch64
 
-build:linux_arm --platforms=@com_github_emacski_bazeltools//platform:linux_arm
+build:linux_arm --platforms=@com_github_emacski_bazeltools//toolchain:linux_arm
 # boringssl requires legacy toolchain resolution
-build:linux_arm --crosstool_top=@com_github_emacski_bazeltools//toolchain/cpp/clang:toolchain
-build:linux_arm --cpu=arm
+build:linux_arm --crosstool_top=@com_github_emacski_bazeltools//toolchain/cpp/clang:clang11_crosstool
+build:linux_arm --cpu=armhf
 
 try-import %workspace%/.bazelrc.user

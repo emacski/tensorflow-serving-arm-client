@@ -14,16 +14,16 @@
 FROM debian:buster
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
+        curl ca-certificates \
         gcc g++ \
         gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf \
-        gcc-aarch64-linux-gnu g++-aarch64-linux-gnu \
-        libtinfo5 \
-        curl xz-utils ca-certificates && \
+        gcc-aarch64-linux-gnu g++-aarch64-linux-gnu && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-ENV INSTALL_LLVM_VERSION=10.0.0
-RUN curl https://raw.githubusercontent.com/emacski/bazel-tools/master/toolchain/cpp/clang/install_clang_cross.sh -o install_clang_cross.sh && \
-    sh install_clang_cross.sh && rm -f install_clang_cross.sh
+# clang cross-compile toolchain
+RUN curl -L https://raw.githubusercontent.com/emacski/bazel-tools/master/toolchain/cpp/clang/install_clang11_debian10.sh \
+        -o install_clang11_debian10.sh && \
+    sh install_clang11_debian10.sh && rm -f install_clang11_debian10.sh
 # python toolchain
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
@@ -43,11 +43,7 @@ RUN dpkg --add-architecture arm64 && \
         libpython3.7-dev:arm64 \
         libpython3.7-dev:armhf && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* && \
-    mkdir /usr/aarch64-linux-gnu/include/aarch64-linux-gnu && \
-    mkdir /usr/arm-linux-gnueabihf/include/arm-linux-gnueabihf && \
-    mv /usr/include/aarch64-linux-gnu/python3.7m /usr/aarch64-linux-gnu/include/aarch64-linux-gnu/ && \
-    mv /usr/include/arm-linux-gnueabihf/python3.7m /usr/arm-linux-gnueabihf/include/arm-linux-gnueabihf/
+    rm -rf /var/lib/apt/lists/*
 # install bazel
 RUN apt-get update && \
     apt-get install -y \

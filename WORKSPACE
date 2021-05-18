@@ -18,12 +18,17 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "com_github_emacski_bazeltools",
-    sha256 = "ef868ef493a8fc9609a32093a90b57f320646fa5af3b3eb49bb7380f5e0580c6",
-    strip_prefix = "bazel-tools-9cbf59fc288489ab3c7e42ed124507e1b1adba3a",
-    urls = ["https://github.com/emacski/bazel-tools/archive/9cbf59fc288489ab3c7e42ed124507e1b1adba3a.tar.gz"],
+    sha256 = "dba9e8f0613401ed3c052d6fe79b3517197a7747046659845309fb17e9b3038d",
+    strip_prefix = "bazel-tools-17a0d8b9ae66bc542853a72365ef1aeb85086827",
+    urls = ["https://github.com/emacski/bazel-tools/archive/17a0d8b9ae66bc542853a72365ef1aeb85086827.tar.gz"],
 )
 
-register_toolchains("@com_github_emacski_bazeltools//toolchain/cpp/clang:all")
+load(
+    "@com_github_emacski_bazeltools//toolchain/cpp/clang:defs.bzl",
+    "register_clang_cross_toolchains",
+)
+
+register_clang_cross_toolchains(clang_version = "11")
 
 # python client deps
 
@@ -95,13 +100,28 @@ go_repository(
 # protobuf / grpc deps
 
 http_archive(
+    name = "com_google_protobuf",
+    sha256 = "0cbdc9adda01f6d2facc65a22a2be5cecefbefe5a09e5382ee8879b522c04441",
+    strip_prefix = "protobuf-3.15.8",
+    urls = [
+        "https://github.com/protocolbuffers/protobuf/archive/v3.15.8.tar.gz",
+    ],
+)
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
+
+http_archive(
     name = "com_github_grpc_grpc",
     patches = [
-        "@com_github_emacski_tensorflowservingarmclient//third_party/grpc:cython_library.patch",
+        "@//third_party/grpc:cython_library.patch",
     ],
     sha256 = "bb6de0544adddd54662ba1c314eff974e84c955c39204a4a2b733ccd990354b7",
     strip_prefix = "grpc-1.36.3",
-    urls = ["https://github.com/grpc/grpc/archive/v1.36.3.tar.gz"],
+    urls = [
+        "https://github.com/grpc/grpc/archive/v1.36.3.tar.gz"
+    ],
 )
 
 load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")

@@ -9,13 +9,17 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "com_github_emacski_bazeltools",
-    sha256 = "ef868ef493a8fc9609a32093a90b57f320646fa5af3b3eb49bb7380f5e0580c6",
-    strip_prefix = "bazel-tools-9cbf59fc288489ab3c7e42ed124507e1b1adba3a",
-    urls = ["https://github.com/emacski/bazel-tools/archive/9cbf59fc288489ab3c7e42ed124507e1b1adba3a.tar.gz"],
+    sha256 = "dba9e8f0613401ed3c052d6fe79b3517197a7747046659845309fb17e9b3038d",
+    strip_prefix = "bazel-tools-17a0d8b9ae66bc542853a72365ef1aeb85086827",
+    urls = ["https://github.com/emacski/bazel-tools/archive/17a0d8b9ae66bc542853a72365ef1aeb85086827.tar.gz"],
 )
 
+load(
+    "@com_github_emacski_bazeltools//toolchain/cpp/clang:defs.bzl",
+    "register_clang_cross_toolchains",
+)
 # OPTIONAL: only required if using the cross-build cc toolchain
-register_toolchains("@com_github_emacski_bazeltools//toolchain/cpp/clang:all")
+register_clang_cross_toolchains(clang_version = "11")
 
 http_archive(
     name = "com_github_emacski_tensorflowservingarmclient",
@@ -54,19 +58,16 @@ Optional Bazel Build Options
 
 # amd64 (x86_64)
 --platforms=@com_github_emacski_bazeltools//platform:linux_amd64
-# some deps still require legacy toolchain resolution
---crosstool_top=@com_github_emacski_bazeltools//toolchain/cpp/clang:toolchain
---cpu=k8
 
 # arm64 (aarch64)
 --platforms=@com_github_emacski_bazeltools//platform:linux_arm64
-# some deps still require legacy toolchain resolution
---crosstool_top=@com_github_emacski_bazeltools//toolchain/cpp/clang:toolchain
+# some deps may still require legacy toolchain resolution
+--crosstool_top=@com_github_emacski_bazeltools//toolchain/cpp/clang:clang11_crosstool
 --cpu=aarch64
 
 # arm (armhf)
 --platforms=@com_github_emacski_bazeltools//platform:linux_arm
 # some deps still require legacy toolchain resolution
---crosstool_top=@com_github_emacski_bazeltools//toolchain/cpp/clang:toolchain
---cpu=arm
+--crosstool_top=@com_github_emacski_bazeltools//toolchain/cpp/clang:clang11_crosstool
+--cpu=armhf
 ```
