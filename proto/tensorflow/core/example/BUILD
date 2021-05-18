@@ -38,5 +38,4 @@ proto_library(
     srcs = ["example.proto"],
     go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/example",
     strip_import_prefix = "/proto/",
-    deps = [":feature_proto"],
 )

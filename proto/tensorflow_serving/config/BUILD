@@ -7,6 +7,7 @@ proto_library(
     go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow_serving",
     strip_import_prefix = "/proto/",
     deps = [
+        ":file_system_storage_path_source_proto",
         ":log_collector_config_proto",
         ":logging_config_proto",
         ":model_server_config_proto",
@@ -19,8 +20,8 @@ proto_library(
     go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow_serving",
     strip_import_prefix = "/proto/",
     deps = [
+        ":file_system_storage_path_source_proto",
         ":logging_config_proto",
-        "//proto/tensorflow_serving/sources/storage_path:file_system_storage_path_source_proto",
     ],
 )
 
@@ -35,6 +36,13 @@ proto_library(
 proto_library(
     name = "log_collector_config_proto",
     srcs = ["log_collector_config.proto"],
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow_serving",
+    strip_import_prefix = "/proto/",
+)
+
+proto_library(
+    name = "file_system_storage_path_source_proto",
+    srcs = ["file_system_storage_path_source.proto"],
     go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow_serving",
     strip_import_prefix = "/proto/",
 )

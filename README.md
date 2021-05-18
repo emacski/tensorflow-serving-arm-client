@@ -67,13 +67,13 @@ Additionally, a pure python3 wheel is published that includes the `tensorflow_se
 **Install Wheels with `pip`**
 ```sh
 # on linux_amd64 python 3.7
-pip install https://github.com/emacski/tensorflow-serving-arm-client/releases/download/2.4.1/tensorflow_serving_arm_client-2.4.1-cp37-none-manylinux2014_x86_64.whl
+pip install https://github.com/emacski/tensorflow-serving-arm-client/releases/download/2.5.1/tensorflow_serving_arm_client-2.5.1-cp37-none-manylinux2014_x86_64.whl
 # on linux_arm64 python 3.7
-pip install https://github.com/emacski/tensorflow-serving-arm-client/releases/download/2.4.1/tensorflow_serving_arm_client-2.4.1-cp37-none-manylinux2014_aarch64.whl
+pip install https://github.com/emacski/tensorflow-serving-arm-client/releases/download/2.5.1/tensorflow_serving_arm_client-2.5.1-cp37-none-manylinux2014_aarch64.whl
 # on linux_arm python 3.7
-pip install https://github.com/emacski/tensorflow-serving-arm-client/releases/download/2.4.1/tensorflow_serving_arm_client-2.4.1-cp37-none-manylinux2014_armv7l.whl
+pip install https://github.com/emacski/tensorflow-serving-arm-client/releases/download/2.5.1/tensorflow_serving_arm_client-2.5.1-cp37-none-manylinux2014_armv7l.whl
 # pure python 3 (will require grpcio and protobuf pypi packages)
-pip install https://github.com/emacski/tensorflow-serving-arm-client/releases/download/2.4.1/tensorflow_serving_arm_client-2.4.1-py3-none-any.whl
+pip install https://github.com/emacski/tensorflow-serving-arm-client/releases/download/2.5.1/tensorflow_serving_arm_client-2.5.1-py3-none-any.whl
 ```
 
 **Building Wheels From Source**

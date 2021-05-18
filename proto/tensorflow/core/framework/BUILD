@@ -11,16 +11,17 @@ proto_library(
         ":api_def_proto",
         ":attr_value_proto",
         ":cost_graph_proto",
+        ":dataset_options_proto",
         ":device_attributes_proto",
         ":function_proto",
         ":graph_proto",
         ":graph_transfer_info_proto",
         ":kernel_def_proto",
         ":log_memory_proto",
+        ":model_proto",
         ":node_def_proto",
         ":op_def_proto",
         ":reader_base_proto",
-        ":remote_fused_graph_execute_info_proto",
         ":resource_handle_proto",
         ":step_stats_proto",
         ":summary_proto",
@@ -131,25 +132,6 @@ proto_library(
 )
 
 proto_library(
-    name = "remote_fused_graph_execute_info_proto",
-    srcs = ["remote_fused_graph_execute_info.proto"],
-    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/framework",
-    strip_import_prefix = "/proto/",
-    deps = [
-        ":attr_value_proto",
-        ":function_proto",
-        ":graph_proto",
-        ":node_def_proto",
-        ":op_def_proto",
-        ":resource_handle_proto",
-        ":tensor_proto",
-        ":tensor_shape_proto",
-        ":types_proto",
-        ":versions_proto",
-    ],
-)
-
-proto_library(
     name = "reader_base_proto",
     srcs = ["reader_base.proto"],
     go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/framework",
@@ -182,6 +164,13 @@ proto_library(
         ":tensor_shape_proto",
         ":types_proto",
     ],
+)
+
+proto_library(
+    name = "model_proto",
+    srcs = ["model.proto"],
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/framework",
+    strip_import_prefix = "/proto/",
 )
 
 proto_library(
@@ -256,6 +245,13 @@ proto_library(
 proto_library(
     name = "device_attributes_proto",
     srcs = ["device_attributes.proto"],
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/framework",
+    strip_import_prefix = "/proto/",
+)
+
+proto_library(
+    name = "dataset_options_proto",
+    srcs = ["dataset_options.proto"],
     go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/framework",
     strip_import_prefix = "/proto/",
 )
