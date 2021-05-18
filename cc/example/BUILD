@@ -23,6 +23,6 @@ cc_library(
     name = "half_plus_two_library",
     srcs = ["half_plus_two.cc"],
     deps = [
-        "@com_github_emacski_tensorflowservingarmclient//cc:tensorflow_serving",
+        "@com_github_emacski_tensorflowservingarmclient//cc:grpc",
     ],
 )

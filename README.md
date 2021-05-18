@@ -13,6 +13,7 @@ Currently, client libraries can be cross-built for c++, python and go targeting
 * [Cross-Building](#cross-building)
 * [Project Artifacts](#project-artifacts)
 * [Client Examples](#client-examples)
+* [Generating Sources](#generating-sources)
 
 ## Cross-Building
 
@@ -39,12 +40,12 @@ docker run --rm -ti \
 
 Examples
 ```sh
+# build python client library for amd64
+bazel build //py:grpc --config=linux_amd64
 # build platform wheel for 32-bit arm
 bazel run //py/wheel:build_platform --config=linux_arm
-# build go client library for amd64
-bazel build //py:tensorflow_serving --config=linux_amd64
 # build go client library for arm64
-bazel build //go:tensorflow_serving --config=linux_arm64
+bazel build //go:grpc --config=linux_arm64
 ```
 
 [Back to Top](#contents)
@@ -144,6 +145,37 @@ bazel run //go/example:half_plus_two -- host.docker.internal:8500
 # or
 bazel build //go/example:half_plus_two
 ./bazel-bin/go/example/half_plus_two host.docker.internal:8500
+```
+
+[Back to Top](#contents)
+
+## Generating Sources
+
+Docker Devel Image
+```sh
+git clone git@github.com:emacski/tensorflow-serving-arm-client.git
+cd tensorflow-serving-arm-client
+# devel image includes all necessary deps to build and run project targets
+docker run --rm -ti \
+    -w /tensorflow-serving-arm-client \
+    -v $PWD:/tensorflow-serving-arm-client \
+    emacski/tensorflow-serving-arm-client:latest-devel /bin/bash
+```
+
+Examples
+```sh
+# py
+bazel build //py:grpc_codegen
+bazel build //py:protobuf_codegen
+# cc
+bazel build //cc:grpc_codegen
+bazel build //cc:protobuf_codegen
+# go
+bazel build //go:grpc_codegen
+bazel build //go:protobuf_codegen
+bazel build //go:tensorflow_core_protobuf_codegen
+bazel build //go:tensorflow_example_protobuf_codegen
+bazel build //go:tensorflow_framework_protobuf_codegen
 ```
 
 [Back to Top](#contents)

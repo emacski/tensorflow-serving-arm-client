@@ -19,6 +19,6 @@ py_binary(
     main = "half_plus_two.py",
     srcs = ["half_plus_two.py"],
     deps = [
-        "@com_github_emacski_tensorflowservingarmclient//py:tensorflow_serving",
+        "@com_github_emacski_tensorflowservingarmclient//py:grpc",
     ],
 )

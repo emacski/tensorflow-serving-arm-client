@@ -21,12 +21,12 @@ load(
 package(default_visibility = ["//visibility:public"])
 
 cc_grpc_library(
-    name = "tensorflow_serving",
+    name = "grpc",
     srcs = ["//proto/tensorflow_serving/apis:protos_grpc_all"],
-    deps = [":tensorflow_serving_protobuf"],
+    deps = [":protobuf"],
 )
 
 cc_proto_library(
-    name = "tensorflow_serving_protobuf",
+    name = "protobuf",
     deps = ["//proto:protos_all"],
 )

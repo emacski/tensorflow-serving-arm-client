@@ -23,6 +23,7 @@ import (
 	"github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/framework"
 	"github.com/emacski/tensorflow-serving-arm-client/go/tensorflow_serving"
 	"google.golang.org/grpc"
+	"google.golang.org/protobuf/encoding/prototext"
 )
 
 func main() {
@@ -67,6 +68,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("%s", res.String())
+	fmt.Printf("%s", prototext.Format(res))
 	os.Exit(0)
 }

@@ -22,10 +22,12 @@ go_binary(
 go_library(
     name = "half_plus_two_library",
     srcs = ["half_plus_two.go"],
-    importpath = "github.com/emacski/tensorflow-serving-arm-client/go/examples",
+    importpath = "github.com/emacski/tensorflow-serving-arm-client/go/example",
     deps = [
         "@org_golang_google_grpc//:go_default_library",
-        "@com_github_emacski_tensorflowservingarmclient//go:tensorflow_serving",
-        "@com_github_emacski_tensorflowservingarmclient//go:tensorflow_framework",
+        "@com_github_emacski_tensorflowservingarmclient//go:grpc",
+        "@com_github_emacski_tensorflowservingarmclient//go:tensorflow_framework_protobuf",
+        # only required for output formatting
+        "@org_golang_google_protobuf//encoding/prototext:go_default_library",
     ],
 )

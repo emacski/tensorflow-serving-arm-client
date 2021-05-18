@@ -30,7 +30,7 @@ genrule(
         "bazel_build.py",
     ],
     data = [":stable-status.txt"],
-    deps = ["//py:tensorflow_serving"],
+    deps = ["@com_github_emacski_tensorflowservingarmclient//py:grpc"],
 ) for whl_type in ("pure", "platform")]
 
 sh_binary(
