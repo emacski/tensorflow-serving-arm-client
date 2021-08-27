@@ -26,7 +26,7 @@ go_library(
     deps = [
         "@org_golang_google_grpc//:go_default_library",
         "@com_github_emacski_tensorflowservingarmclient//go:grpc",
-        "@com_github_emacski_tensorflowservingarmclient//go:tensorflow_framework_protobuf",
+        "@com_github_emacski_tensorflowservingarmclient//go:tensorflow_framework_protos",
         # only required for output formatting
         "@org_golang_google_protobuf//encoding/prototext:go_default_library",
     ],

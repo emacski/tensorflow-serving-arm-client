@@ -23,36 +23,36 @@ go_grpc_library(
     name = "grpc",
     srcs = ["//proto/tensorflow_serving/apis:protos_grpc_all"],
     importpath = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow_serving",
-    deps = [":protobuf"],
+    deps = [":protos"],
 )
 
 go_proto_library(
-    name = "protobuf",
+    name = "protos",
     importpath = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow_serving",
     proto = ["//proto/tensorflow_serving:protos_all"],
     deps = [
-        ":tensorflow_core_protobuf",
-        ":tensorflow_example_protobuf",
-        ":tensorflow_framework_protobuf",
+        ":tensorflow_core_protos",
+        ":tensorflow_example_protos",
+        ":tensorflow_framework_protos",
     ],
 )
 
 go_proto_library(
-    name = "tensorflow_core_protobuf",
+    name = "tensorflow_core_protos",
     importpath = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core",
     proto = ["//proto/tensorflow/core:protos_all"],
-    deps = [":tensorflow_framework_protobuf"],
+    deps = [":tensorflow_framework_protos"],
 )
 
 go_proto_library(
-    name = "tensorflow_example_protobuf",
+    name = "tensorflow_example_protos",
     importpath = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/example",
     proto = ["//proto/tensorflow/core/example:protos_all"],
-    deps = [":tensorflow_framework_protobuf"],
+    deps = [":tensorflow_framework_protos"],
 )
 
 go_proto_library(
-    name = "tensorflow_framework_protobuf",
+    name = "tensorflow_framework_protos",
     importpath = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/framework",
     proto = ["//proto/tensorflow/core/framework:protos_all"],
 )

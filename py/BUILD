@@ -24,11 +24,11 @@ py_grpc_library(
     name = "grpc",
     srcs = ["//proto/tensorflow_serving/apis:protos_grpc_all"],
     srcs_version = "PY3",
-    deps = [":protobuf"],
+    deps = [":protos"],
 )
 
 py_proto_library(
-    name = "protobuf",
+    name = "protos",
     srcs_version = "PY3",
     deps = ["//proto:protos_all"],
 )
