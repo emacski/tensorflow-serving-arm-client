@@ -9,7 +9,5 @@ proto_library(
     deps = [
         "//proto/tensorflow_serving/apis:protos_all",
         "//proto/tensorflow_serving/config:protos_all",
-        "//proto/tensorflow_serving/core:protos_all",
-        "//proto/tensorflow_serving/util:protos_all",
     ],
 )

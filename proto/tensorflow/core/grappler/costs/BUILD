@@ -22,6 +22,7 @@ proto_library(
         "//proto/tensorflow/core/framework:cost_graph_proto",
         "//proto/tensorflow/core/framework:dataset_options_proto",
         "//proto/tensorflow/core/framework:device_attributes_proto",
+        "//proto/tensorflow/core/framework:full_type_proto",
         "//proto/tensorflow/core/framework:function_proto",
         "//proto/tensorflow/core/framework:graph_proto",
         "//proto/tensorflow/core/framework:graph_transfer_info_proto",

@@ -12,6 +12,7 @@ proto_library(
         ":get_model_status_proto",
         ":inference_proto",
         ":input_proto",
+        ":logging_proto",
         ":model_management_proto",
         ":model_proto",
         ":model_service_proto",
@@ -20,6 +21,7 @@ proto_library(
         ":prediction_service_proto",
         ":regression_proto",
         ":session_service_proto",
+        ":status_proto",
     ],
 )
 
@@ -64,10 +66,10 @@ proto_library(
     deps = [
         ":classification_proto",
         ":inference_proto",
+        ":logging_proto",
         ":predict_proto",
         ":regression_proto",
         ":session_service_proto",
-        "//proto/tensorflow_serving/core:logging_proto",
     ],
 )
 
@@ -110,8 +112,19 @@ proto_library(
     go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow_serving",
     strip_import_prefix = "/proto/",
     deps = [
+        ":status_proto",
         "//proto/tensorflow_serving/config:model_server_config_proto",
-        "//proto/tensorflow_serving/util:status_proto",
+    ],
+)
+
+proto_library(
+    name = "logging_proto",
+    srcs = ["logging.proto"],
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow_serving",
+    strip_import_prefix = "/proto/",
+    deps = [
+        ":model_proto",
+        "//proto/tensorflow_serving/config:logging_config_proto",
     ],
 )
 
@@ -146,8 +159,16 @@ proto_library(
     strip_import_prefix = "/proto/",
     deps = [
         ":model_proto",
-        "//proto/tensorflow_serving/util:status_proto",
+        ":status_proto",
     ],
+)
+
+proto_library(
+    name = "status_proto",
+    srcs = ["status.proto"],
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow_serving",
+    strip_import_prefix = "/proto/",
+    deps = ["//proto/tensorflow/core:protos_all"],
 )
 
 proto_library(

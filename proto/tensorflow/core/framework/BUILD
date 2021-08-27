@@ -13,6 +13,7 @@ proto_library(
         ":cost_graph_proto",
         ":dataset_options_proto",
         ":device_attributes_proto",
+        ":full_type_proto",
         ":function_proto",
         ":graph_proto",
         ":graph_transfer_info_proto",
@@ -145,6 +146,7 @@ proto_library(
     strip_import_prefix = "/proto/",
     deps = [
         ":attr_value_proto",
+        ":full_type_proto",
         ":resource_handle_proto",
         ":tensor_proto",
         ":tensor_shape_proto",
@@ -159,6 +161,7 @@ proto_library(
     strip_import_prefix = "/proto/",
     deps = [
         ":attr_value_proto",
+        ":full_type_proto",
         ":resource_handle_proto",
         ":tensor_proto",
         ":tensor_shape_proto",
@@ -215,6 +218,7 @@ proto_library(
     strip_import_prefix = "/proto/",
     deps = [
         ":attr_value_proto",
+        ":full_type_proto",
         ":function_proto",
         ":node_def_proto",
         ":op_def_proto",
@@ -233,6 +237,7 @@ proto_library(
     strip_import_prefix = "/proto/",
     deps = [
         ":attr_value_proto",
+        ":full_type_proto",
         ":node_def_proto",
         ":op_def_proto",
         ":resource_handle_proto",
@@ -240,6 +245,13 @@ proto_library(
         ":tensor_shape_proto",
         ":types_proto",
     ],
+)
+
+proto_library(
+    name = "full_type_proto",
+    srcs = ["full_type.proto"],
+    go_package = "github.com/emacski/tensorflow-serving-arm-client/go/tensorflow/core/framework",
+    strip_import_prefix = "/proto/",
 )
 
 proto_library(
