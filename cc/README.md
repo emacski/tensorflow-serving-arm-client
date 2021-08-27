@@ -30,9 +30,9 @@ http_archive(
 
 http_archive(
     name = "com_github_grpc_grpc",
-    sha256 = "bb6de0544adddd54662ba1c314eff974e84c955c39204a4a2b733ccd990354b7",
-    strip_prefix = "grpc-1.36.3",
-    urls = ["https://github.com/grpc/grpc/archive/v1.36.3.tar.gz"],
+    sha256 = "024118069912358e60722a2b7e507e9c3b51eeaeee06e2dd9d95d9c16f6639ec",
+    strip_prefix = "grpc-1.39.1",
+    urls = ["https://github.com/grpc/grpc/archive/v1.39.1.tar.gz"],
 )
 
 load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
